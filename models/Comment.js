@@ -3,8 +3,6 @@ const sequelize = require('../config/connection');
 
 class Comment extends Model {}
 
-
-
 // create fields/columns for Comment model
 Comment.init(
     {
@@ -26,7 +24,8 @@ Comment.init(
         references: {
           model: 'user',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       post_id: {
         type: DataTypes.INTEGER,
@@ -34,7 +33,8 @@ Comment.init(
         references: {
           model: 'post',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       }
     },
     {
