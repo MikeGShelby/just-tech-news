@@ -82,30 +82,6 @@ router.post('/', (req, res) => {
 
 // POST /api/users (user login route)
 router.post('/login', (req, res) => {
-<<<<<<< HEAD:routes/api/user-routes.js
-  // expects {email: 'lernantino@gmail.com', password: 'password1234'}
-  /* FORMAT
-    {
-      "email": "email1@email.com",
-      "password": "password1"
-    }
-  */
-    User.findOne({
-      where: {
-        email: req.body.email
-      }
-    }).then(dbUserData => {
-      if (!dbUserData) {
-        res.status(400).json({ message: 'No user with that email address!' });
-        return;
-      }
-      // Verify user
-      const validPassword = dbUserData.checkPassword(req.body.password);
-      if (!validPassword) {
-        res.status(400).json({ message: 'Incorrect password!' });
-        return;
-      }
-=======
   User.findOne({
     where: {
       email: req.body.email
@@ -128,7 +104,6 @@ router.post('/login', (req, res) => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
->>>>>>> develop:controllers/api/user-routes.js
 
       res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
@@ -147,13 +122,8 @@ router.post('/logout', (req, res) => {
 
 });
 
-<<<<<<< HEAD:routes/api/user-routes.js
-// PUT /api/users/1 (UPDATE user by ID)
-router.put('/:id', (req, res) => {
-=======
 // PUT /api/users/1 (update user info)
 router.put('/:id', withAuth, (req, res) => {
->>>>>>> develop:controllers/api/user-routes.js
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     /* FORMAT
         {
